@@ -1,10 +1,10 @@
 {
-  "name": "test_api",
+  "name": "mcuuid-search-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "An API that can search Minecraft UUID using the username or the UUID itself of the player.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server",
     "dev": "nodemon server"
   },
   "keywords": [],
@@ -15,5 +15,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
