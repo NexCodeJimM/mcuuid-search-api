@@ -31,52 +31,27 @@ app.get("/api/user/:identifier", (req, res) => {
 
 	request(apiUrl, (error, response, body) => {
 		if (!error && response.statusCode === 200) {
-			if (apiUrl.includes("names")) {
-				const json = JSON.parse(body);
-				const username = json[json.length - 1].name;
-				const uuid = identifier;
-				const formattedUuid =
-					uuid.slice(0, 8) +
-					"-" +
-					uuid.slice(8, 12) +
-					"-" +
-					uuid.slice(12, 16) +
-					"-" +
-					uuid.slice(16, 20) +
-					"-" +
-					uuid.slice(20);
-				const skinUrl = `https://mc-heads.net/avatar/${uuid}`;
-				const skinUrlBody = `https://mc-heads.net/body/${uuid}`;
-				res.send({
-					uuid: uuid,
-					formatted_uuid: formattedUuid,
-					username: username,
-					skin_url: skinUrl,
-					skin_body: skinUrlBody,
-				});
-			} else {
-				const json = JSON.parse(body);
-				const uuid = json.id;
-				const formattedUuid =
-					uuid.slice(0, 8) +
-					"-" +
-					uuid.slice(8, 12) +
-					"-" +
-					uuid.slice(12, 16) +
-					"-" +
-					uuid.slice(16, 20) +
-					"-" +
-					uuid.slice(20);
-				const skinUrl = `https://mc-heads.net/avatar/${uuid}`;
-				const skinUrlBody = `https://mc-heads.net/body/${uuid}`;
-				res.send({
-					uuid: uuid,
-					formatted_uuid: formattedUuid,
-					username: json.name,
-					skin_url: skinUrl,
-					skin_body: skinUrlBody,
-				});
-			}
+			const json = JSON.parse(body);
+			const uuid = json.id ? json.id : identifier;
+			const formattedUuid =
+				uuid.slice(0, 8) +
+				"-" +
+				uuid.slice(8, 12) +
+				"-" +
+				uuid.slice(12, 16) +
+				"-" +
+				uuid.slice(16, 20) +
+				"-" +
+				uuid.slice(20);
+			const skinUrl = `https://mc-heads.net/avatar/${uuid}`;
+			const skinUrlBody = `https://mc-heads.net/body/${uuid}`;
+			res.send({
+				uuid: uuid,
+				formatted_uuid: formattedUuid,
+				username: json.name,
+				skin_url: skinUrl,
+				skin_body: skinUrlBody,
+			});
 		} else {
 			res.status(404).send({ error: `User "${identifier}" not found` });
 		}
