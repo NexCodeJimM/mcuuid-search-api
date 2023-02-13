@@ -4,10 +4,10 @@ const dotenv = require("dotenv");
 const cors = require("cors"); // Calling cors dependency.
 const corsOptions = require("./config/corsOptions"); // Calling corsOptions
 
+dotenv.config();
+
 const app = express();
 const port = process.env.PORT || 5002;
-
-dotenv.config();
 
 app.use(cors(corsOptions));
 
