@@ -1,15 +1,18 @@
 const express = require("express");
 const request = require("request");
+const dotenv = require("dotenv");
 const cors = require("cors"); // Calling cors dependency.
 const corsOptions = require("./config/corsOptions"); // Calling corsOptions
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 5002;
+
+dotenv.config();
 
 app.use(cors(corsOptions));
 
 app.listen(port, () => {
-	console.log(`API server started on http://localhost:${port}`);
+	console.log(`API is running on port ${port}`);
 });
 
 // Home Path
